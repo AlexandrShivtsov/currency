@@ -24,4 +24,3 @@ def contact_us(requsts):
             f'email: {contact.email_from} subject: {contact.subject} message: {contact.message} </br>'
         )
     return HttpResponse(resalt)
-
