@@ -1,7 +1,7 @@
 
 
 def foo():
-    l = []
+    l1 = []
     for i in range(1, 100):
-        l.append(i)
-    return l
+        l1.append(i)
+    return l1
