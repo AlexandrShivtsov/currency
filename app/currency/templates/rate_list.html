@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+<a href="/">Home</a>
+    <table border="1" width="30%">
+       <tr align="center">
+            <td><b>Email</b></td>
+            <td><b>Sabject</b></td>
+            <td><b>Message</b></td>
+        </tr>
+        {% for contact in rate_list %}
+        <tr align="center">
+            <td>{{ contact.email_from }}</td>
+            <td>{{ contact.subject }}</td>
+            <td>{{ contact.message }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+<table border="1" width="10%">
+      <tr align="center">
+            <td><b>Rates</b></td>
+        </tr>
+        {% for contact in rate_list %}
+        <tr align="left">
+            <td>{{ contact}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
