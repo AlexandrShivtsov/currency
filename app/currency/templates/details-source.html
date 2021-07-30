@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% include 'includes/footer.html' %}
+<a href="/source-list/">SourceList</a>
+<br>
+ID: {{ source.id }}<br>
+Name: {{ source.name }}<br>
+Source URL: {{ source.source_url }}<br>
+
+{% endblock %}

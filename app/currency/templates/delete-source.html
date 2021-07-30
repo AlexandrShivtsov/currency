@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% include 'includes/footer.html' %}
+<a href="/source-list/">SourceList</a>
+<br>
+<form method="post">
+    {% csrf_token %}
+    <h1>Are you sure you wont to delele?</h1><br>
+      <tr align="center">
+            ID: <td>{{ source.id }}</td><br>
+            Source URL: <td>{{ source.source_url }}</td><br>
+            Name: <td>{{ source.name }}</td><br>
+        </tr>
+    <button type="submit">Delete</button>
+</form>
+
+{% endblock %}
