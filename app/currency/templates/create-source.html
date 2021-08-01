@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% include 'includes/footer.html' %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send to server</button>
+</form>
+{% endblock %}
+
