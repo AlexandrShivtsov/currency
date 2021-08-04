@@ -3,11 +3,10 @@
 {% block main_content %}
 {% include 'includes/footer.html' %}
 
-<a href="create-source/">Create source</a>
+<a href="{% url 'currency:create-source' %}">Create source</a>
 
  <table border="1" width="35%">
        <tr align="center">
-            <td><b>ID</b></td>
             <td><b>URL</b></td>
             <td><b>Name</b></td>
             <td><b>Details</b></td>
@@ -16,12 +15,11 @@
        </tr>
         {% for source in source_list %}
         <tr align="center" width="35%">
-            <td>{{ source.id }}</td>
             <td>{{ source.source_url }}</td>
             <td>{{ source.name }}</td>
-            <td><a href="details-source/{{ source.id }}">Details</a></td>
-            <td><a href="update-source/{{ source.id }}">Update</a></td>
-            <td><a href="delete-source/{{ source.id }}">Delete</a></td>
+            <td><a href="{% url 'currency:details-source' source.pk %}">Details</a></td>
+            <td><a href="{% url 'currency:update-source' source.pk %}">Update</a></td>
+            <td><a href="{% url 'currency:delete-source' source.pk %}">Delete</a></td>
         </tr>
         {% endfor %}
     </table>
