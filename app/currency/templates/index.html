@@ -2,8 +2,8 @@
 
 {% block main_content %}
 {% include 'includes/footer.html' %}
-<a href="login/">LogIn</a><br>
-<a href="source-list/">SourceList</a>
+<a href="{% url 'currency:login' %}">LogIn</a><br>
+<a href="{% url 'currency:source-list' %}">SourceList</a>
 
 <h1>Hello from index</h1>
 {% endblock %}

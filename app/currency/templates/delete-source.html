@@ -2,7 +2,7 @@
 
 {% block main_content %}
 {% include 'includes/footer.html' %}
-<a href="/source-list/">SourceList</a>
+<a href="{% url 'currency:source-list' %}">SourceList</a>
 <br>
 <form method="post">
     {% csrf_token %}
