@@ -1,7 +1,8 @@
 from currency.forms import SourceForm
-from currency.models import ContactUs, Source
+from currency.models import ContactCreate, ContactUs, Source
 
-
+from django.conf import settings
+from django.core.mail import send_mail
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
@@ -48,3 +49,31 @@ class SourceDeleteView(DeleteView):
     queryset = Source.objects.all()
     success_url = reverse_lazy('currency:source-list')
     template_name = 'delete-source.html'
+
+
+class ContactusCreateView(CreateView):
+    queryset = ContactCreate.objects.all()
+    success_url = reverse_lazy('index')
+    template_name = 'contactus-create.html'
+    fields = (
+        'email_to',
+        'subject',
+        'message',
+    )
+
+    def form_valid(self, form):
+        email_to = form.cleaned_data['email_to']
+        subject = form.cleaned_data['subject']
+        message = form.cleaned_data['message']
+        full_email_massage = f'''
+        Email From: {email_to}
+        Message: {message}
+        '''
+        send_mail(
+            subject,
+            full_email_massage,
+            settings.EMAIL_HOST_USER,
+            [settings.SUPPORT_EMAIL],
+            fail_silently=False,
+        )
+        return super().form_valid(form)

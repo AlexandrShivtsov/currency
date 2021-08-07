@@ -1,4 +1,7 @@
 <div>
   <a href="/">Home</a></br>
-  <a href="/contactus">Rate-list</a>
+  <a href="{% url 'currency:login' %}">LogIn</a><br>
+  <a href="{% url 'currency:contactus-create' %}">Contact Us</a><br>
+  <a href="{% url 'currency:source-list' %}">SourceList</a><br>
+  <br>
 </div>

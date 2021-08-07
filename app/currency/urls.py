@@ -1,13 +1,11 @@
-from currency.views import SourceCreateView, SourceListView
-from currency.views import SourceDeleteView
-from currency.views import SourceDetailsView
-from currency.views import SourceLoginView
-from currency.views import SourceUpdateView
+from currency.views import (ContactusCreateView, SourceCreateView, SourceDeleteView,
+                            SourceDetailsView, SourceListView, SourceLoginView,
+                            SourceUpdateView,)
 
 import debug_toolbar
 
-from django.urls import include
-from django.urls import path
+from django.urls import include, path
+
 
 app_name = 'currency'
 
@@ -18,6 +16,7 @@ urlpatterns = [
     path('source-list/details-source/<int:pk>/', SourceDetailsView.as_view(), name='details-source'),
     path('source-list/update-source/<int:pk>/', SourceUpdateView.as_view(), name='update-source'),
     path('source-list/delete-source/<int:pk>/', SourceDeleteView.as_view(), name='delete-source'),
+    path('contactus/create/', ContactusCreateView.as_view(), name='contactus-create'),
 
     path('__debug__/', include(debug_toolbar.urls)),
 ]
