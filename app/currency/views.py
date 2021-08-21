@@ -1,8 +1,8 @@
 from currency.forms import SourceForm
-from currency.models import ContactCreate, ContactUs, Source
+from currency.models import ContactCreate, ContactUs, Rate, Source
 
-from django.conf import settings
-from django.core.mail import send_mail
+from django.conf import settings # noqa
+from django.core.mail import send_mail # noqa
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, TemplateView, UpdateView
@@ -69,11 +69,19 @@ class ContactusCreateView(CreateView):
         Email From: {email_to}
         Message: {message}
         '''
-        send_mail(
-            subject,
-            full_email_massage,
-            settings.EMAIL_HOST_USER,
-            [settings.SUPPORT_EMAIL],
-            fail_silently=False,
-        )
+        from currency.tasks import contact
+        contact.apply_async(args=(subject, full_email_massage))
+        # send_mail(
+        #     subject,
+        #     full_email_massage,
+        #     settings.EMAIL_HOST_USER,
+        #     [settings.SUPPORT_EMAIL],
+        #     fail_silently=False,
+        # )
         return super().form_valid(form)
+
+
+class CurrencyRateListView(ListView):
+    context_object_name = 'source_list'
+    queryset = Rate.objects.all()
+    template_name = 'currency_rate_list.html'

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% include 'includes/footer.html' %}
+
+
+ <table border="1" width="35%">
+       <tr align="center">
+            <td><b>ID</b></td>
+            <td><b>Source</b></td>
+            <td><b>Type</b></td>
+            <td><b>Buy</b></td>
+            <td><b>Sale</b></td>
+       </tr>
+        {% for rate in source_list %}
+        <tr align="center" width="35%">
+            <td>{{ rate.id }}</td>
+            <td>{{ rate.source }}</td>
+            <td>{{ rate.currency_type }}</td>
+            <td>{{ rate.buy }}</td>
+            <td>{{ rate.sale }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
