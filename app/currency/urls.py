@@ -1,6 +1,6 @@
-from currency.views import (ContactusCreateView, SourceCreateView, SourceDeleteView,
-                            SourceDetailsView, SourceListView, SourceLoginView,
-                            SourceUpdateView,)
+from currency.views import (ContactusCreateView, CurrencyRateListView, SourceCreateView,
+                            SourceDeleteView, SourceDetailsView, SourceListView,
+                            SourceLoginView, SourceUpdateView)
 
 import debug_toolbar
 
@@ -12,6 +12,7 @@ app_name = 'currency'
 urlpatterns = [
     path('login/', SourceLoginView.as_view(), name='login'),
     path('source-list/', SourceListView.as_view(), name='source-list'),
+    path('rate-list/', CurrencyRateListView.as_view(), name='rate-list'),
     path('source-list/create-source/', SourceCreateView.as_view(), name='create-source'),
     path('source-list/details-source/<int:pk>/', SourceDetailsView.as_view(), name='details-source'),
     path('source-list/update-source/<int:pk>/', SourceUpdateView.as_view(), name='update-source'),
