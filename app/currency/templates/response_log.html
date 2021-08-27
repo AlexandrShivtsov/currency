@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block main_content %}
+{% include 'includes/footer.html' %}
+
+
+ <table border="1" width="35%">
+       <tr align="center">
+            <td><b>ID</b></td>
+            <td><b>Create</b></td>
+            <td><b>Status code</b></td>
+            <td><b>Request method</b></td>
+            <td><b>Path</b></td>
+            <td><b>Response time</b></td>
+       </tr>
+        {% for response in response_log %}
+        <tr align="center" width="35%">
+            <td>{{ response.id }}</td>
+            <td>{{ response.created }}</td>
+            <td>{{ response.status_code }}</td>
+            <td>{{ response.request_method }}</td>
+            <td>{{ response.path }}</td>
+            <td>{{ response.response_time }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

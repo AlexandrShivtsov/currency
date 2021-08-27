@@ -1,6 +1,6 @@
-from currency.views import (ContactusCreateView, CurrencyRateListView, SourceCreateView,
-                            SourceDeleteView, SourceDetailsView, SourceListView,
-                            SourceLoginView, SourceUpdateView)
+from currency.views import (ContactusCreateView, CurrencyRateListView, CurrencyResponseLog,
+                            SourceCreateView, SourceDeleteView, SourceDetailsView,
+                            SourceListView, SourceLoginView, SourceUpdateView)
 
 import debug_toolbar
 
@@ -18,6 +18,8 @@ urlpatterns = [
     path('source-list/update-source/<int:pk>/', SourceUpdateView.as_view(), name='update-source'),
     path('source-list/delete-source/<int:pk>/', SourceDeleteView.as_view(), name='delete-source'),
     path('contactus/create/', ContactusCreateView.as_view(), name='contactus-create'),
+    path('response-log/', CurrencyResponseLog.as_view(), name='response-log'),
 
     path('__debug__/', include(debug_toolbar.urls)),
+
 ]
