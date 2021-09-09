@@ -1,6 +1,14 @@
 <div>
   <a href="/">Home</a></br>
-  <a href="{% url 'currency:login' %}">LogIn</a><br>
+  {% if request.user.is_authenticated %}
+    {{ request.user.email }}<br>
+    <a href="{% url 'accounts:my-profile' %}">My Profile</a><br>
+    <a href="{% url 'logout' %}">LogOut</a><br>
+  {% else %}
+    <a href= '#'>SingUp</a><br>
+    <a href= "{% url 'login' %}">Login</a><br>
+  {% endif %}
+  <a href="{% url 'accounts:password_reset' %}">ResetPassword</a><br>
   <a href="{% url 'currency:contactus-create' %}">Contact Us</a><br>
   <a href="{% url 'currency:source-list' %}">SourceList</a><br>
   <a href="{% url 'currency:rate-list' %}">RateList</a><br>
