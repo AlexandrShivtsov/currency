@@ -17,9 +17,25 @@
         <tr align="center" width="35%">
             <td>{{ source.source_url }}</td>
             <td>{{ source.name }}</td>
-            <td><a href="{% url 'currency:details-source' source.pk %}">Details</a></td>
-            <td><a href="{% url 'currency:update-source' source.pk %}">Update</a></td>
-            <td><a href="{% url 'currency:delete-source' source.pk %}">Delete</a></td>
+
+            {% if request.user.is_authenticated %}
+                <td><a href="{% url 'currency:details-source' source.pk %}">Details</a></td>
+            {% else %}
+                <td>You must be logged in to view details</td>
+            {% endif %}
+
+            {% if request.user.is_superuser %}
+                <td><a href="{% url 'currency:update-source' source.pk %}">Update</a></td>
+            {% else %}
+                <td>You have to beat the superuser to remove</td>
+            {% endif %}
+
+            {% if request.user.is_superuser %}
+                <td><a href="{% url 'currency:delete-source' source.pk %}">Delete</a></td>
+            {% else %}
+                <td>You have to beat the superuser to remove</td>
+            {% endif %}
+
         </tr>
         {% endfor %}
     </table>

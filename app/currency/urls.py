@@ -1,6 +1,6 @@
 from currency.views import (ContactusCreateView, CurrencyRateListView, CurrencyResponseLog,
                             SourceCreateView, SourceDeleteView, SourceDetailsView,
-                            SourceListView, SourceLoginView, SourceUpdateView)
+                            SourceListView, SourceUpdateView)
 
 import debug_toolbar
 
@@ -10,7 +10,7 @@ from django.urls import include, path
 app_name = 'currency'
 
 urlpatterns = [
-    path('login/', SourceLoginView.as_view(), name='login'),
+
     path('source-list/', SourceListView.as_view(), name='source-list'),
     path('rate-list/', CurrencyRateListView.as_view(), name='rate-list'),
     path('source-list/create-source/', SourceCreateView.as_view(), name='create-source'),
