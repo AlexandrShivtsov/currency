@@ -155,3 +155,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/1')
         },
     }
+
+HTTP_SCHEMA = 'http'
+DOMAIN = 'localhost:8000'
