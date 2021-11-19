@@ -1,18 +1,52 @@
-<div>
-  <a href="/">Home</a></br>
-  {% if request.user.is_authenticated %}
-    {{ request.user.email }}<br>
-    <a href="{% url 'accounts:my-profile' %}">My Profile</a><br>
-    <a href="{% url 'logout' %}">LogOut</a><br>
-  {% else %}
-    <a href= '#'>SingUp</a><br>
-    <a href= "{% url 'login' %}">Login</a><br>
-  {% endif %}
-  <a href="{% url 'accounts:password_reset' %}">ResetPassword</a><br>
-  <a href="{% url 'currency:contactus-create' %}">Contact Us</a><br>
-  <a href="{% url 'currency:source-list' %}">SourceList</a><br>
-  <a href="{% url 'currency:rate-list' %}">RateList</a><br>
-  <a href="{% url 'currency:response-log' %}">Response Log</a><br>
-  <a href="{% url 'accounts:sing-up' %}">Sing Up</a><br>
-  <br>
-</div>
+<!--<div>-->
+<!--  <a class="btn btn-secondary" href="/">Home</a></br>-->
+<!--  {% if request.user.is_authenticated %}-->
+<!--    {{ request.user.email }}<br>-->
+<!--    <a class="btn btn-secondary" href="{% url 'accounts:my-profile' %}">My Profile</a><br>-->
+<!--    <a class="btn btn-danger" href="{% url 'logout' %}">LogOut</a><br>-->
+<!--  {% else %}-->
+<!--    <a class="btn btn-success" href= "{% url 'login' %}">Login</a><br>-->
+<!--  {% endif %}-->
+<!--  <a class="btn btn-secondary" href="{% url 'accounts:password_reset' %}">ResetPassword</a><br>-->
+<!--  <a class="btn btn-secondary" href="{% url 'currency:contactus-create' %}">Contact Us</a><br>-->
+<!--  <a class="btn btn-secondary" href="{% url 'currency:source-list' %}">SourceList</a><br>-->
+<!--  <a class="btn btn-secondary" href="{% url 'currency:rate-list' %}">RateList</a><br>-->
+<!--  <a class="btn btn-secondary" href="{% url 'currency:response-log' %}">Response Log</a><br>-->
+<!--  <a class="btn btn-primary" href="{% url 'accounts:sing-up' %}">Sing Up</a><br>-->
+<!--  <br>-->
+<!--</div>-->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="/">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarText">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'currency:contactus-create' %}">Contact Us<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'currency:rate-list' %}">RateList</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'currency:source-list' %}">SourceList</a>
+      </li>
+       <li class="nav-item active">
+        <a class="nav-link" href="{% url 'currency:response-log' %}">Response Log</a>
+      </li>
+    </ul>
+
+    <span class="navbar-text">
+        {% if request.user.is_authenticated %}
+          {{ request.user.email }}<br>
+          <a class="btn btn-secondary" href="{% url 'accounts:my-profile' %}">My Profile</a>
+          <a class="btn btn-danger" href="{% url 'logout' %}">LogOut</a>
+          <a class="btn btn-secondary" href="{% url 'accounts:password_reset' %}">ResetPassword</a>
+        {% else %}
+          <a class="btn btn-warning" href="{% url 'accounts:sing-up' %}">Sing Up</a>
+          <a class="btn btn-success" href= "{% url 'login' %}">Login</a>
+        {% endif %}
+    </span>
+  </div>
+</nav>

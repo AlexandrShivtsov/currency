@@ -16,6 +16,13 @@ class Source(models.Model):
     source_url = models.URLField(max_length=255)
     name = models.CharField(max_length=64)
 
+    avatar = models.FileField(
+        blank=True,
+        null=True,
+        default=None,
+        upload_to='avatars',
+    )
+
 
 class ContactCreate(models.Model):
     email_to = models.EmailField(max_length=50)

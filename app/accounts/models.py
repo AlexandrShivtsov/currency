@@ -7,6 +7,13 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    avatar = models.FileField(
+        blank=True,
+        null=True,
+        default=None,
+        upload_to='avatars',
+    )
+
     username = models.CharField(error_messages={'unique': 'A user with that username already exists.'},
                                 help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.',
                                 max_length=150,
