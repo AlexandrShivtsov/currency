@@ -1,4 +1,3 @@
-import os
 from pathlib import Path
 
 from celery.schedules import crontab
@@ -34,7 +33,7 @@ INSTALLED_APPS = [
     'silk',
     'debug_toolbar',
     'accounts',
-
+    'crispy_forms',
     'currency',
 ]
 
@@ -122,9 +121,18 @@ AUTH_USER_MODEL = 'accounts.User'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / '..' / 'static_content' / 'media'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_REDIRECT_URL = reverse_lazy('index')
@@ -155,3 +163,7 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute='*/1')
         },
     }
+
+HTTP_SCHEMA = 'http'
+DOMAIN = 'localhost:8000'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

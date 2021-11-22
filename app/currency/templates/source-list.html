@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block main_content %}
 {% include 'includes/footer.html' %}
 
-<a href="{% url 'currency:create-source' %}">Create source</a>
+<a class="btn btn-secondary" href="{% url 'currency:create-source' %}">Create source</a>
 
- <table border="1" width="35%">
+ <table class="table table-striped" border="1" width="35%">
        <tr align="center">
             <td><b>URL</b></td>
             <td><b>Name</b></td>
@@ -14,29 +14,37 @@
             <td><b>Delete</b></td>
        </tr>
         {% for source in source_list %}
+
         <tr align="center" width="35%">
             <td>{{ source.source_url }}</td>
-            <td>{{ source.name }}</td>
+            <td width="400">{{ source.name }}
+                 {% if source.name == 'PrivatBank' %}
+                    <img src="{% static 'image/privat.png' %}"   width="20%">
+                 {% elif source.name == 'MonoBank'%}
+                    <img src="{% static 'image/mono.png' %}"  width="15%">
+                 {% endif %}
+            </td>
 
             {% if request.user.is_authenticated %}
-                <td><a href="{% url 'currency:details-source' source.pk %}">Details</a></td>
+                <td><a class="btn btn-secondary" href="{% url 'currency:details-source' source.pk %}">Details</a></td>
             {% else %}
                 <td>You must be logged in to view details</td>
             {% endif %}
 
             {% if request.user.is_superuser %}
-                <td><a href="{% url 'currency:update-source' source.pk %}">Update</a></td>
+                <td><a class="btn btn-secondary" href="{% url 'currency:update-source' source.pk %}">Update</a></td>
             {% else %}
-                <td>You have to beat the superuser to remove</td>
+                <td>You have to beat the superuser to update</td>
             {% endif %}
 
             {% if request.user.is_superuser %}
-                <td><a href="{% url 'currency:delete-source' source.pk %}">Delete</a></td>
+                <td><a class="btn btn-danger" href="{% url 'currency:delete-source' source.pk %}">Delete</a></td>
             {% else %}
                 <td>You have to beat the superuser to remove</td>
             {% endif %}
 
         </tr>
         {% endfor %}
+
     </table>
 {% endblock %}

@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
+{% load crispy_forms_filters %}
+
 
 {% block main_content %}
 {% include 'includes/footer.html' %}
-
+</br>
 <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Send to server</button>
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-secondary">Send to server</button>
 </form>
 {% endblock %}
 

@@ -1,5 +1,7 @@
 import debug_toolbar
 
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from django.views.generic import TemplateView
@@ -14,3 +16,5 @@ urlpatterns = [
     path('silk/', include('silk.urls', namespace='silk')),
     path('auth/', include('django.contrib.auth.urls'))
 ]
+
+urlpatterns.extend(static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT))

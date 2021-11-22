@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
-
 {% block main_content %}
 {% include 'includes/footer.html' %}
 
+Sing Up
+
 <form method="post">
     {% csrf_token %}
-    {{ form|crispy }}
-    <button type="submit">Login</button>
+    {{ form.as_p }}
+    <button type="submit">Sing Up</button>
 </form>
 {% endblock %}
