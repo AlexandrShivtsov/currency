@@ -1,0 +1,6 @@
+requests
+bs4
+csv
+fake_useragent
+random
+time
