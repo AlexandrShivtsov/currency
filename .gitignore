@@ -131,3 +131,6 @@ dmypy.json
 .idea/
 
 static
+jobs.csv
+jobs.json
+work_ua.db
