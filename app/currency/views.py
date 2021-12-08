@@ -1,5 +1,5 @@
 from currency.forms import SourceForm
-from currency.models import ContactCreate, ContactUs, Rate, ResponseLog, Source
+from currency.models import ContactCreate, ContactUs, Rate, ResponseLog, Source, SourceBank
 
 from django.conf import settings # noqa
 from django.core.mail import send_mail # noqa
@@ -33,7 +33,7 @@ class SourceCreateView(CreateView):
     template_name = 'create-source.html'
 
 
-class SourceDetailsView(DetailView):
+class SourceView(DetailView):
     queryset = Source.objects.all()
     template_name = 'details-source.html'
 
@@ -83,7 +83,7 @@ class ContactusCreateView(CreateView):
 
 class CurrencyRateListView(ListView):
     context_object_name = 'source_list'
-    queryset = Rate.objects.all()
+    queryset = Rate.objects.all().select_related('source')
     template_name = 'currency_rate_list.html'
 
 
@@ -91,3 +91,8 @@ class CurrencyResponseLog(ListView):
     context_object_name = 'response_log'
     queryset = ResponseLog.objects.all()
     template_name = 'response_log.html'
+
+
+class SourceDetailsView(DetailView):
+    queryset = SourceBank.objects.all()
+    template_name = 'details-source-bank.html'
