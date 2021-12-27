@@ -4,6 +4,12 @@
 {% include 'includes/footer.html' %}
 
 
+Source details<br>
+
+<br>
+ID: {{ object.id }}<br>
+Name: {{ object.name }}<br>
+
  <table class="table table-striped" border="1" width="35%">
        <tr align="center">
             <td><b>ID</b></td>
@@ -12,10 +18,10 @@
             <td><b>Buy</b></td>
             <td><b>Sale</b></td>
        </tr>
-        {% for rate in source_list %}
+        {% for rate in object.rates.all %}
         <tr align="center" width="35%">
             <td>{{ rate.id }}</td>
-            <td><a href="{% url 'currency:details-source-bank' rate.source_id %}"> {{ rate.source.name }} </a></td>
+            <td><a href="{% url 'currency:details-source-bank' rate.id %}"> {{ rate.source.name }} </a></td>
             <td>{{ rate.get_currency_type_display }}</td>
             <td>{{ rate.buy }}</td>
             <td>{{ rate.sale }}</td>
@@ -23,3 +29,4 @@
         {% endfor %}
     </table>
 {% endblock %}
+

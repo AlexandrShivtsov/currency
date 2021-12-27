@@ -7,7 +7,7 @@ from django.db import models
 
 
 class ContactUs(models.Model):
-    email_from = models.EmailField(max_length=50)
+    email_from = models.CharField(max_length=255)
     subject = models.CharField(max_length=255)
     message = models.CharField(max_length=2056)
 
@@ -31,12 +31,25 @@ class ContactCreate(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
 
+class SourceBank(models.Model):
+    name = models.CharField(max_length=64)
+    code_name = models.CharField(max_length=64, unique=True, editable=False)
+
+
 class Rate(models.Model):
     sale = models.DecimalField(max_digits=5, decimal_places=2)
     buy = models.DecimalField(max_digits=5, decimal_places=2)
     created = models.DateTimeField(auto_now_add=True)
-    source = models.CharField(max_length=32)
-    currency_type = models.CharField(max_length=3, choices=mch.RATE_TAPES)
+    # source = models.CharField(max_length=32)
+    source = models.ForeignKey(
+        SourceBank,
+        related_name='rates',
+        on_delete=models.CASCADE,)
+    currency_type = models.CharField(max_length=3,
+                                     choices=mch.RATE_TAPES,
+                                     blank=False,
+                                     null=False,
+                                     default=mch.TAPE_USD)
 
 
 class ResponseLog(models.Model):

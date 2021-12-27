@@ -4,6 +4,9 @@ from bs4 import BeautifulSoup
 
 from celery import shared_task
 
+from currency import consts
+from currency import model_choces as mch
+
 from django.core.mail import send_mail
 
 import requests
@@ -33,22 +36,28 @@ def contact(subject, full_email_massage):
 
 @shared_task
 def parse_privatbank():
-    from currency.models import Rate
+    from currency.models import Rate, SourceBank
     privatbank_api_url = 'https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5'
     response = requests.get(privatbank_api_url)
 
     response.raise_for_status()
 
     rates = response.json()
-    source = 'privatbank'
-    available_currency_types = ('USD', 'EUR')
+
+    source = SourceBank.objects.get_or_create(
+        code_name=consts.CODE_NAME_PRIVATBANK,
+        defaults={'name': 'PrivatBank'},
+    )[0]
+    available_currency_types = {
+        'USD': mch.TAPE_USD,
+        'EUR': mch.TAPE_EUR,
+    }
 
     for rate in rates:
         currency_type = rate['ccy']
         if currency_type in available_currency_types:
             buy = round_currency(rate['buy'])
             sale = round_currency(rate['sale'])
-
             last_rate = Rate.objects.filter(
                 currency_type=currency_type,
                 source=source
@@ -70,7 +79,7 @@ def parse_privatbank():
 
 @shared_task
 def parse_monobank():
-    from currency.models import Rate
+    from currency.models import Rate, SourceBank
     monobank_api_url = 'https://api.monobank.ua/bank/currency'
     response = requests.get(monobank_api_url)
 
@@ -78,7 +87,10 @@ def parse_monobank():
 
     rates = response.json()
 
-    source = 'monobank'
+    source = SourceBank.objects.get_or_create(
+        code_name=consts.CODE_NAME_MONOBANK,
+        defaults={'name': 'MonoBank'},
+    )[0]
     available_currency_types = {840: 'USD', 978: 'EUR'}
 
     for rate in rates:
