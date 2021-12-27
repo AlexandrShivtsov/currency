@@ -19,7 +19,6 @@ urlpatterns = [
     path('source-list/delete-source/<int:pk>/', SourceDeleteView.as_view(), name='delete-source'),
     path('contactus/create/', ContactusCreateView.as_view(), name='contactus-create'),
     path('response-log/', CurrencyResponseLog.as_view(), name='response-log'),
-
     path('__debug__/', include(debug_toolbar.urls)),
 
 ]

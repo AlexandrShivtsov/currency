@@ -7,7 +7,7 @@ from django.db import models
 
 
 class ContactUs(models.Model):
-    email_from = models.EmailField(max_length=50)
+    email_from = models.CharField(max_length=255)
     subject = models.CharField(max_length=255)
     message = models.CharField(max_length=2056)
 

@@ -1,4 +1,6 @@
 from django.core.mail import send_mail
+# from currency.models import Rate
+# import random
 
 send_mail(
     'Subject here',
